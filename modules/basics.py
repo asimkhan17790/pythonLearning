@@ -1,28 +1,50 @@
-# Writing Functions
-# We have 2 types of functions
-# 1 - That return a ValueError
-# 2 - That do something
+# Python is a dynamically typed language
+# REPL -- Read Evaluate Print Loop
 
-def greet_me(name, age=-1):
-    print(f"Hello {name}... Your age is {age}")
+# operators
 
+a = 5
+b = 2
+print(a+b)
+print(a*b)
+print(a/b)
+print(a-b)
+print(a % b)
+print(a//b)
 
-#   2greet_me("Asim", 33)
-
-
-def increment(number, by=1, printMessage=" Default Message"):
-    print(printMessage)
-    return number + by
-
-
-# print(increment(19, printMessage="asim"))
-
-def multiply(*nums):
-    total = 1
-    for n in nums:
-        print(n)
-        total *= n
-    return total
+# Exponents
+print(a**b)
 
 
-print(f"Total: {multiply(1, 2, 3)}")
+# Comparisons
+
+# < > <= >=
+
+print(not None)
+print(not 0)
+print(not "")
+
+print(bool(None))
+
+# Logical Operators
+# and
+# or
+# not
+
+
+# Membership operators
+
+# in
+# not in
+
+fruits = ["apple", "banana", "orange"]
+print("banana" in fruits)
+
+# Identity Operators
+x = "Asim"
+y = "Asim"
+print(x is y)  # returns True
+
+l1 = [1, 2, 3]
+l2 = [1, 2, 3]
+print(l1 is l2)  # returns false as both lists point to different memory locations

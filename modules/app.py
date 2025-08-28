@@ -1,4 +1,4 @@
-import math
+
 name = "Asim"
 temp = 25
 
