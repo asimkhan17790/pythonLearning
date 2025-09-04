@@ -15,8 +15,14 @@ def say_hello(a):
 say_hello("Asim")
 
 """
+DECORATORS USAGE:
 
+- logging
+- Timing
+- Authentication
+- Caching
+- Rate limiting
+- Input Validation
+- Instrumentation
 
-
-
-    """
+"""
