@@ -1,0 +1,4 @@
+Hey this is Asim and I am learning python.
+I work in full stack development
+I love writing code
+I like AL and ML
