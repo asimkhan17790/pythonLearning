@@ -1,5 +1,5 @@
 from functools import reduce
-
+from typeguard import typechecked
 
 nums = [1, 3, 4, 5, 10, 21]
 
@@ -31,3 +31,11 @@ print(c3)
 
 c4 = reduce(lambda a, b:  a+b, nums)
 print("Sum using lambda:", c4)
+
+
+@typechecked
+def sum(a: int, b: int) -> int:
+    return a+b
+
+
+print(sum(5, 4))
