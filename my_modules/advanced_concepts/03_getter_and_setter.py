@@ -24,3 +24,5 @@ print("Updating Name to Asim: ")
 
 e.set_first_name("Asim")
 print("Now the full name is :", e.name)
+
+# Property decorator
