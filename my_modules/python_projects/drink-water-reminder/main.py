@@ -1,9 +1,8 @@
 import time
 import asyncio
-import signal
-# from plyer import notification
+from plyer import notification
 # plyer does not work on MacOS
-import pync
+import pync  # Library for terminal notification
 from desktop_notifier import DesktopNotifier, Urgency, Button, ReplyField, DEFAULT_SOUND
 
 
