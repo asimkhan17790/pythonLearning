@@ -1,6 +1,6 @@
 import time
 import asyncio
-from plyer import notification
+# from plyer import notification
 # plyer does not work on MacOS
 import pync  # Library for terminal notification
 from desktop_notifier import DesktopNotifier, Urgency, Button, ReplyField, DEFAULT_SOUND
@@ -9,10 +9,6 @@ from desktop_notifier import DesktopNotifier, Urgency, Button, ReplyField, DEFAU
 async def start_notification_app():
 
     while True:
-
-        # notification.notify(title="Please drink some water",
-        #                     message="You need to drink some water.... Its been an hour")
-
         # pync.notify("Please Drink Water",
         #            title="!!!REMINDER!!!", sound="Horn")
 

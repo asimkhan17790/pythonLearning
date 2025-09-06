@@ -15,7 +15,7 @@
 # Creating requirements.txt file
 
 # pip freeze - lists the packages in current virtual environment
-# pip freeze > requirements.txt. --> saves the dependencies in requirements.txt
+# pip freeze > requirements.txt --> saves the dependencies in requirements.txt
 # pip install -r requirements.txt --> to install packages from the requirements.txt
 
 

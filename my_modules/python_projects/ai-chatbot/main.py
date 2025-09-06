@@ -10,8 +10,9 @@ messages = [
 
 def completion(message):
     global messages
-    print("CONTEXT: ", messages)
-    # Add latest user input to message context
+    print("current Context: ", messages)
+    # Add latest user input to message context with role set as : user
+
     messages.append({"role": "user",
                      "content": message
                      })
@@ -26,7 +27,7 @@ def completion(message):
         "role": "assistant",
         "content": chat_completion.choices[0].message.content
     }
-    # Adding context at line 29
+    # Adding context at line 29 as an assistant which will add prior replies of Jarvis
     messages.append(message)
     print(f"Jarvis: {message["content"]}")
 
