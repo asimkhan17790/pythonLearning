@@ -73,6 +73,36 @@
             </div>
           </div>
           <div class="p-5 mb-4 bg-body-tertiary rounded-3">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Marks</th>
+                  <th scope="col">Standing</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for name, mark in marks.items() %}
+                {# COMMENT in JINJA #}
+                <tr>
+                  <td>{{ loop.index }}</th>
+                  <td>{{ name }}</td>
+                  <td>{{ mark }}</td>
+                  <td>{% if mark >80 %}
+                    <span>Good</span>
+                  {% else %}
+                    <span>Bad</span>
+                  {% endif %}
+                  </td> 
+                </tr>
+                {% endfor %}
+                
+              </tbody>
+            </table>
+          </div>
+
+          <div class="p-5 mb-4 bg-body-tertiary rounded-3">
             <form action="/" method="post" class="row g-3">
               <div class="col-md-6">
                 <label for="fullName" class="form-label">Full Name</label>

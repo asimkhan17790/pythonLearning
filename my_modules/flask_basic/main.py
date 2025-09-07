@@ -40,7 +40,17 @@ def home():
         # with open("file.txt", "w") as f:
         #    f.write(f"{request.form['fullName']} {request.form['email']}")
 
-    return render_template("home.html")
+    marks = {
+        "John": 45,
+        "Asim": 100,
+        "SN": 91,
+        "Taran": 66,
+        "AS": 89,
+        "SK": 89
+
+    }
+
+    return render_template("home.html", marks=marks)
 
 
 @app.route("/services")
