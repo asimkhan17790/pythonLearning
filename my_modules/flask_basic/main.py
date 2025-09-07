@@ -12,7 +12,7 @@
 # You can also run the code like below:
 # To run from terminal using the flask command:
 #   flask --app main run. - bring server up on port 5000 by default
-#   flask --app main run --host=localhost --port=9000. -- can provide custom port
+#   flask --app main run --host=localhost --port=9000 -- can provide custom port
 
 
 from flask import Flask, render_template, send_from_directory, request
