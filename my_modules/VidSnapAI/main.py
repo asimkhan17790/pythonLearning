@@ -51,7 +51,8 @@ def create():
 
 @app.route("/gallery")
 def gallery():
-    return render_template("gallery.html")
+    reels = os.listdir("static/reels")
+    return render_template("gallery.html", reels=reels)
 
 
 def allowed_file(filename):

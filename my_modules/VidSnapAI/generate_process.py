@@ -30,8 +30,8 @@ if __name__ == "__main__":
 
     while True:
         print("Processing Queue...")
+        print(''.join('.' * i for i in range(1, 11)))
         with open("done.txt", "r") as f:
-            # done_folders.append(f.readline())
             done_folders = f.readlines()
         done_folders = [f.strip() for f in done_folders]
 
