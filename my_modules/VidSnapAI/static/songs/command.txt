@@ -1,0 +1,4 @@
+ffmpeg -f concat-safe 0 -i user_uploads/a72c02f4-8ecd-11f0-98c4-acde48001122/input.txt -i user_uploads/a72c02f4-8ecd-11f0-98c4-acde48001122/audio.mp3 -vf "scale=1080:1920: force_original_aspect_ratio=decrease,pad=1080:1920:(ow-iw)/2:(oh-ih)/2:black" -c:v libx264 -c:a aac -shortest -r 30 -pix_fmt yuv420p static/reels/a72c02f4-8ecd-11f0-98c4-acde48001122.mp4
+
+
+ffmpeg -f concat -safe 0 -i user_uploads/a72c02f4-8ecd-11f0-98c4-acde48001122/input.txt -c copy output.mp4
