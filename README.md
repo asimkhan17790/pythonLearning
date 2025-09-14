@@ -290,23 +290,509 @@ print(f"Score: {score}, Grade: {grade}")
 
 ## 5. Loops
 
-```python
-for i in range(5):
-    print("For loop iteration:", i)
+Loops allow you to execute code repeatedly, making your programs efficient and powerful. Python provides two main types of loops: `for` loops and `while` loops.
 
+### For Loops - When You Know How Many Times to Repeat
+
+For loops are perfect when you know exactly how many times you want to repeat something, or when you want to go through each item in a collection.
+
+```python
+# Basic for loop with range
+print("Counting from 0 to 4:")
+for i in range(5):
+    print(f"Loop iteration: {i}")
+
+# For loop with custom range
+print("\nCounting from 2 to 8, step by 2:")
+for i in range(2, 9, 2):
+    print(f"Number: {i}")
+
+# Looping through a list
+fruits = ["apple", "banana", "cherry", "date"]
+print("\nFruits in my basket:")
+for fruit in fruits:
+    print(f"I have a {fruit}")
+
+# Looping with both index and value
+print("\nFruits with their positions:")
+for index, fruit in enumerate(fruits):
+    print(f"Position {index}: {fruit}")
+
+# Looping through a dictionary
+student_grades = {"Alice": 95, "Bob": 87, "Charlie": 92}
+print("\nStudent grades:")
+for name, grade in student_grades.items():
+    print(f"{name}: {grade}%")
+```
+
+### While Loops - When You Don't Know How Many Times
+
+While loops continue running as long as a condition is True. They're great for situations where you don't know exactly how many iterations you need.
+
+```python
+# Basic while loop
 count = 0
+print("Counting with while loop:")
 while count < 3:
-    print("While loop count:", count)
-    count += 1
+    print(f"While loop count: {count}")
+    count += 1  # Don't forget to update the counter!
+
+# User input example
+print("\nGuessing game:")
+secret_number = 7
+guess = 0
+attempts = 0
+
+while guess != secret_number and attempts < 3:
+    guess = int(input("Guess a number between 1-10: "))
+    attempts += 1
+
+    if guess == secret_number:
+        print(f"Correct! You guessed it in {attempts} attempts!")
+    elif guess < secret_number:
+        print("Too low!")
+    else:
+        print("Too high!")
+
+    if attempts == 3 and guess != secret_number:
+        print(f"Game over! The number was {secret_number}")
+```
+
+### Loop Control Statements
+
+Control the flow of your loops with `break`, `continue`, and `else`.
+
+```python
+# Using break to exit early
+print("Finding the first number divisible by 7:")
+for num in range(1, 20):
+    if num % 7 == 0:
+        print(f"Found it: {num}")
+        break  # Exit the loop immediately
+    print(f"Checking {num}...")
+
+# Using continue to skip iterations
+print("\nPrinting only even numbers:")
+for num in range(1, 8):
+    if num % 2 == 1:  # If odd
+        continue  # Skip the rest of this iteration
+    print(f"Even number: {num}")
+
+# Using else with loops (runs if loop completes without break)
+print("\nSearching for letter 'z' in word:")
+word = "python"
+for letter in word:
+    print(f"Checking: {letter}")
+    if letter == 'z':
+        print("Found z!")
+        break
+else:
+    print("Letter 'z' not found in the word")
+```
+
+### Nested Loops
+
+Loops inside other loops are useful for working with multi-dimensional data.
+
+```python
+# Nested loops example - multiplication table
+print("Multiplication table:")
+for i in range(1, 4):
+    for j in range(1, 4):
+        result = i * j
+        print(f"{i} × {j} = {result:2}", end="  ")
+    print()  # New line after each row
+
+# Working with 2D data
+matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+
+print("\nMatrix elements:")
+for row_index, row in enumerate(matrix):
+    for col_index, value in enumerate(row):
+        print(f"Position ({row_index},{col_index}): {value}")
+```
+
+**💡 Pro Tips:**
+- Use `for` loops when you know the number of iterations
+- Use `while` loops when the number of iterations depends on a condition
+- Always ensure `while` loops have a way to eventually become False (avoid infinite loops!)
+- Use `break` to exit loops early and `continue` to skip iterations
+- The `else` clause in loops runs only if the loop completes without hitting `break`
+
+**⚠️ Common Pitfalls:**
+- Forgetting to increment counters in while loops (causes infinite loops)
+- Modifying a list while iterating over it (can cause unexpected behavior)
+- Using the wrong type of loop for the task
+
+**🔍 Real-World Examples:**
+```python
+# Processing a shopping cart
+shopping_cart = [
+    {"item": "laptop", "price": 999.99, "quantity": 1},
+    {"item": "mouse", "price": 25.50, "quantity": 2},
+    {"item": "keyboard", "price": 75.00, "quantity": 1}
+]
+
+total_cost = 0
+print("Shopping Cart Summary:")
+print("-" * 40)
+
+for item in shopping_cart:
+    item_total = item["price"] * item["quantity"]
+    total_cost += item_total
+    print(f"{item['item'].title():<12} ${item['price']:>7.2f} × {item['quantity']} = ${item_total:>8.2f}")
+
+print("-" * 40)
+print(f"{'Total':<12} ${total_cost:>34.2f}")
+
+# File processing simulation
+print("\nProcessing files:")
+files = ["document.pdf", "image.jpg", "data.csv", "backup.zip"]
+processed_count = 0
+
+for filename in files:
+    print(f"Processing {filename}...")
+
+    # Simulate different processing based on file type
+    if filename.endswith('.pdf'):
+        print("  → Extracting text content")
+    elif filename.endswith('.jpg'):
+        print("  → Resizing image")
+    elif filename.endswith('.csv'):
+        print("  → Loading data into database")
+    elif filename.endswith('.zip'):
+        print("  → Extracting archive")
+    else:
+        print("  → Unknown file type, skipping")
+        continue
+
+    processed_count += 1
+    print("  ✓ Complete")
+
+print(f"\nProcessed {processed_count} out of {len(files)} files")
 ```
 
 ## 6. Functions
 
+Functions are reusable blocks of code that perform specific tasks. They help organize your code, avoid repetition, and make your programs more modular and maintainable. Think of functions as mini-programs within your main program.
+
+### Basic Function Definition
+
+Functions are defined using the `def` keyword, followed by the function name, parameters in parentheses, and a colon.
+
 ```python
+# Basic function
 def greet(name):
+    """This function greets someone by name"""
     print(f"Hello, {name}!")
-greet("Maverick")
+
+# Call the function
+greet("Alice")     # Hello, Alice!
+greet("Bob")       # Hello, Bob!
+
+# Function with multiple parameters
+def introduce(name, age, city):
+    print(f"Hi, I'm {name}. I'm {age} years old and I live in {city}.")
+
+introduce("Charlie", 25, "New York")
+# Hi, I'm Charlie. I'm 25 years old and I live in New York.
 ```
+
+### Functions with Return Values
+
+Functions can return values using the `return` statement, making them more versatile.
+
+```python
+# Function that returns a value
+def add(a, b):
+    """Add two numbers and return the result"""
+    result = a + b
+    return result
+
+# Use the returned value
+sum_result = add(5, 3)
+print(f"5 + 3 = {sum_result}")  # 5 + 3 = 8
+
+# Function with multiple return statements
+def get_grade(score):
+    """Convert numerical score to letter grade"""
+    if score >= 90:
+        return "A"
+    elif score >= 80:
+        return "B"
+    elif score >= 70:
+        return "C"
+    elif score >= 60:
+        return "D"
+    else:
+        return "F"
+
+student_grade = get_grade(85)
+print(f"Grade: {student_grade}")  # Grade: B
+
+# Function returning multiple values
+def get_name_parts(full_name):
+    """Split full name into first and last name"""
+    parts = full_name.split()
+    first_name = parts[0]
+    last_name = parts[-1] if len(parts) > 1 else ""
+    return first_name, last_name
+
+first, last = get_name_parts("John Smith")
+print(f"First: {first}, Last: {last}")  # First: John, Last: Smith
+```
+
+### Default Parameters
+
+Parameters can have default values, making them optional when calling the function.
+
+```python
+# Function with default parameters
+def create_profile(name, age, country="USA", occupation="Student"):
+    """Create a user profile with some default values"""
+    return {
+        "name": name,
+        "age": age,
+        "country": country,
+        "occupation": occupation
+    }
+
+# Call with all parameters
+profile1 = create_profile("Alice", 25, "Canada", "Engineer")
+print(profile1)
+
+# Call with some defaults
+profile2 = create_profile("Bob", 30, occupation="Teacher")
+print(profile2)
+
+# Call with minimum required parameters
+profile3 = create_profile("Charlie", 20)
+print(profile3)
+
+# Power function with default exponent
+def power(base, exponent=2):
+    """Raise base to the power of exponent (default: square)"""
+    return base ** exponent
+
+print(f"3^2 = {power(3)}")      # 3^2 = 9 (uses default)
+print(f"2^5 = {power(2, 5)}")   # 2^5 = 32
+```
+
+### Keyword Arguments
+
+You can specify arguments by name when calling functions, which makes calls more readable and allows changing order.
+
+```python
+# Function demonstrating keyword arguments
+def book_flight(passenger, departure, destination, date, class_type="Economy"):
+    """Book a flight with specified details"""
+    return f"Flight booked for {passenger}: {departure} → {destination} on {date} ({class_type})"
+
+# Positional arguments (order matters)
+booking1 = book_flight("Alice", "New York", "London", "2024-06-15")
+print(booking1)
+
+# Keyword arguments (order doesn't matter)
+booking2 = book_flight(
+    destination="Paris",
+    passenger="Bob",
+    date="2024-07-01",
+    departure="Chicago",
+    class_type="Business"
+)
+print(booking2)
+
+# Mix of positional and keyword arguments
+booking3 = book_flight("Charlie", "Boston", destination="Tokyo", date="2024-08-10")
+print(booking3)
+```
+
+### Variable-Length Arguments (*args and **kwargs)
+
+Functions can accept varying numbers of arguments using `*args` and `**kwargs`.
+
+```python
+# *args for variable number of positional arguments
+def calculate_average(*numbers):
+    """Calculate average of any number of values"""
+    if not numbers:
+        return 0
+    return sum(numbers) / len(numbers)
+
+print(f"Average of 2, 4, 6: {calculate_average(2, 4, 6)}")
+print(f"Average of 1, 3, 5, 7, 9: {calculate_average(1, 3, 5, 7, 9)}")
+
+# **kwargs for variable number of keyword arguments
+def create_user(**user_info):
+    """Create user with flexible attributes"""
+    print("User created with the following information:")
+    for key, value in user_info.items():
+        print(f"  {key}: {value}")
+
+create_user(name="Alice", age=30, email="alice@email.com", city="New York")
+create_user(username="bob123", age=25, country="Canada", hobby="Photography")
+
+# Combining *args and **kwargs
+def process_data(*args, **kwargs):
+    """Process data with flexible input"""
+    print(f"Positional arguments: {args}")
+    print(f"Keyword arguments: {kwargs}")
+
+    # Process numbers
+    if args:
+        total = sum(args)
+        print(f"Sum of numbers: {total}")
+
+    # Process options
+    if "format" in kwargs:
+        print(f"Output format: {kwargs['format']}")
+
+process_data(1, 2, 3, 4, format="JSON", debug=True)
+```
+
+### Local vs Global Variables
+
+Understanding variable scope is crucial when working with functions.
+
+```python
+# Global variable
+global_message = "I'm global!"
+
+def demonstrate_scope():
+    # Local variable
+    local_message = "I'm local!"
+    print(f"Inside function - Global: {global_message}")
+    print(f"Inside function - Local: {local_message}")
+
+demonstrate_scope()
+print(f"Outside function - Global: {global_message}")
+# print(local_message)  # This would cause an error!
+
+# Modifying global variables
+counter = 0  # Global variable
+
+def increment_counter():
+    global counter  # Declare we want to modify the global variable
+    counter += 1
+    print(f"Counter incremented to: {counter}")
+
+def get_counter():
+    return counter  # Reading global variable (no 'global' needed)
+
+print(f"Initial counter: {get_counter()}")
+increment_counter()
+increment_counter()
+print(f"Final counter: {get_counter()}")
+```
+
+### Lambda Functions (Anonymous Functions)
+
+Lambda functions are small, anonymous functions defined with the `lambda` keyword.
+
+```python
+# Regular function
+def square(x):
+    return x ** 2
+
+# Equivalent lambda function
+square_lambda = lambda x: x ** 2
+
+print(f"Regular function: {square(5)}")
+print(f"Lambda function: {square_lambda(5)}")
+
+# Lambda with multiple arguments
+multiply = lambda x, y: x * y
+print(f"3 × 4 = {multiply(3, 4)}")
+
+# Lambda functions are often used with built-in functions
+numbers = [1, 2, 3, 4, 5]
+
+# Using lambda with map()
+squared = list(map(lambda x: x**2, numbers))
+print(f"Squared numbers: {squared}")
+
+# Using lambda with filter()
+evens = list(filter(lambda x: x % 2 == 0, numbers))
+print(f"Even numbers: {evens}")
+
+# Using lambda with sorted() for custom sorting
+students = [("Alice", 85), ("Bob", 92), ("Charlie", 78), ("Diana", 96)]
+sorted_by_grade = sorted(students, key=lambda student: student[1], reverse=True)
+print(f"Students by grade: {sorted_by_grade}")
+```
+
+**💡 Pro Tips:**
+- Use descriptive function names that clearly indicate what the function does
+- Write docstrings to document your functions
+- Keep functions focused on a single task (Single Responsibility Principle)
+- Use default parameters to make functions more flexible
+- Return values instead of printing when possible (makes functions more reusable)
+
+**⚠️ Common Mistakes:**
+- Forgetting to call the function (using `function_name` instead of `function_name()`)
+- Not returning a value when you need to use the result
+- Modifying global variables without using the `global` keyword
+- Making functions too long or complex
+
+**🔍 Real-World Examples:**
+
+```python
+# Data validation function
+def validate_email(email):
+    """Validate email format (simplified)"""
+    if "@" not in email or "." not in email.split("@")[-1]:
+        return False, "Invalid email format"
+    return True, "Valid email"
+
+# Test the validation
+test_emails = ["user@example.com", "invalid-email", "test@domain.org"]
+for email in test_emails:
+    is_valid, message = validate_email(email)
+    print(f"{email}: {message}")
+
+# Calculator function
+def calculate(operation, a, b):
+    """Perform basic arithmetic operations"""
+    operations = {
+        "add": lambda x, y: x + y,
+        "subtract": lambda x, y: x - y,
+        "multiply": lambda x, y: x * y,
+        "divide": lambda x, y: x / y if y != 0 else "Cannot divide by zero"
+    }
+
+    if operation in operations:
+        return operations[operation](a, b)
+    else:
+        return "Unknown operation"
+
+# Use the calculator
+print(f"10 + 5 = {calculate('add', 10, 5)}")
+print(f"10 ÷ 0 = {calculate('divide', 10, 0)}")
+
+# File processing function
+def process_file_data(filename, data_processor):
+    """Process file data using a custom processor function"""
+    print(f"Processing {filename}...")
+
+    # Simulate reading file data
+    sample_data = [1, 2, 3, 4, 5]
+
+    # Apply the processor function
+    processed = data_processor(sample_data)
+
+    print(f"Processed data: {processed}")
+    return processed
+
+# Use with different processors
+process_file_data("numbers.txt", lambda data: [x * 2 for x in data])
+process_file_data("values.txt", lambda data: sum(data) / len(data))
+```
+
+Functions are fundamental building blocks that make your code more organized, reusable, and easier to test and debug. Master them, and you'll write much cleaner and more maintainable Python code!
 
 ## 7. Data Structures
 
@@ -335,12 +821,285 @@ print(list(my_dict.keys()))
 
 ## 8. List Comprehensions
 
+List comprehensions are a powerful and elegant way to create lists in Python. They provide a concise way to transform and filter data, making your code more readable and often faster than traditional loops.
+
+### Basic List Comprehensions
+
+The basic syntax is: `[expression for item in iterable]`
+
 ```python
-evens = [x for x in range(10) if x % 2 == 0]
-squares = [x**2 for x in range(5)]
-matrix = [[1, 2], [3, 4]]
-flattened = [num for row in matrix for num in row]
+# Traditional way with a loop
+squares_traditional = []
+for x in range(5):
+    squares_traditional.append(x**2)
+print(f"Traditional way: {squares_traditional}")
+
+# List comprehension way (more Pythonic!)
+squares_comprehension = [x**2 for x in range(5)]
+print(f"List comprehension: {squares_comprehension}")
+
+# Both produce: [0, 1, 4, 9, 16]
 ```
+
+### List Comprehensions with Conditions
+
+Add `if` conditions to filter elements: `[expression for item in iterable if condition]`
+
+```python
+# Get even numbers from 0 to 9
+evens = [x for x in range(10) if x % 2 == 0]
+print(f"Even numbers: {evens}")  # [0, 2, 4, 6, 8]
+
+# Get squares of odd numbers only
+odd_squares = [x**2 for x in range(10) if x % 2 == 1]
+print(f"Squares of odd numbers: {odd_squares}")  # [1, 9, 25, 49, 81]
+
+# Filter words by length
+words = ["python", "is", "awesome", "and", "powerful"]
+long_words = [word for word in words if len(word) > 3]
+print(f"Words longer than 3 characters: {long_words}")  # ['python', 'awesome', 'powerful']
+
+# Transform and filter in one go
+names = ["alice", "bob", "charlie", "diana"]
+capitalized_short_names = [name.title() for name in names if len(name) <= 5]
+print(f"Capitalized short names: {capitalized_short_names}")  # ['Alice', 'Bob', 'Diana']
+```
+
+### Working with Strings
+
+```python
+# Extract numbers from a string
+text = "I have 3 cats, 2 dogs, and 15 fish"
+numbers = [int(char) for char in text if char.isdigit()]
+print(f"Numbers found: {numbers}")  # [3, 2, 1, 5]
+
+# Convert to uppercase vowels only
+sentence = "Python programming is fun"
+vowels_upper = [char.upper() for char in sentence if char.lower() in 'aeiou']
+print(f"Uppercase vowels: {vowels_upper}")  # ['o', 'o', 'a', 'i', 'i', 'u']
+
+# Create acronym from words
+phrase = "Application Programming Interface"
+acronym = [word[0].upper() for word in phrase.split()]
+print(f"Acronym: {''.join(acronym)}")  # API
+```
+
+### Nested List Comprehensions
+
+Handle multi-dimensional data and complex transformations:
+
+```python
+# Flatten a 2D matrix
+matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+flattened = [num for row in matrix for num in row]
+print(f"Flattened matrix: {flattened}")  # [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+# Create a multiplication table
+multiplication_table = [[i * j for j in range(1, 4)] for i in range(1, 4)]
+print("Multiplication table:")
+for row in multiplication_table:
+    print(row)
+# [[1, 2, 3], [2, 4, 6], [3, 6, 9]]
+
+# Extract specific elements from nested structure
+students = [
+    {"name": "Alice", "grades": [95, 87, 92]},
+    {"name": "Bob", "grades": [78, 85, 90]},
+    {"name": "Charlie", "grades": [88, 91, 85]}
+]
+
+# Get all grades from all students
+all_grades = [grade for student in students for grade in student["grades"]]
+print(f"All grades: {all_grades}")
+
+# Get names of students with any grade above 90
+high_achievers = [student["name"] for student in students
+                 if any(grade > 90 for grade in student["grades"])]
+print(f"High achievers: {high_achievers}")  # ['Alice', 'Charlie']
+```
+
+### Dictionary and Set Comprehensions
+
+Python also supports dictionary and set comprehensions with similar syntax:
+
+```python
+# Dictionary comprehensions {key: value for item in iterable}
+numbers = [1, 2, 3, 4, 5]
+squares_dict = {num: num**2 for num in numbers}
+print(f"Squares dictionary: {squares_dict}")  # {1: 1, 2: 4, 3: 9, 4: 16, 5: 25}
+
+# Create word length dictionary
+words = ["python", "java", "javascript", "go", "rust"]
+word_lengths = {word: len(word) for word in words}
+print(f"Word lengths: {word_lengths}")
+
+# Set comprehensions {expression for item in iterable}
+text = "programming"
+unique_letters = {letter for letter in text if letter != 'm'}
+print(f"Unique letters (no 'm'): {unique_letters}")  # {'p', 'r', 'o', 'g', 'a', 'n', 'i'}
+
+# Get unique word lengths
+sentences = ["Python is great", "I love coding", "Data science rocks"]
+unique_word_lengths = {len(word) for sentence in sentences for word in sentence.split()}
+print(f"Unique word lengths: {unique_word_lengths}")
+```
+
+### Advanced List Comprehensions
+
+```python
+# Conditional expressions (ternary operator in comprehensions)
+numbers = [-2, -1, 0, 1, 2, 3]
+abs_or_zero = [abs(x) if x != 0 else "zero" for x in numbers]
+print(f"Absolute values or zero: {abs_or_zero}")  # [2, 1, 'zero', 1, 2, 3]
+
+# Multiple conditions
+ages = [15, 22, 17, 30, 25, 16, 45]
+categories = [
+    "teen" if 13 <= age <= 19
+    else "young adult" if 20 <= age <= 29
+    else "adult" if 30 <= age <= 49
+    else "senior"
+    for age in ages
+]
+print(f"Age categories: {categories}")
+
+# Working with enumerate for index and value
+fruits = ["apple", "banana", "cherry", "date"]
+indexed_fruits = [f"{i}: {fruit}" for i, fruit in enumerate(fruits)]
+print(f"Indexed fruits: {indexed_fruits}")
+
+# Zip multiple lists
+names = ["Alice", "Bob", "Charlie"]
+ages = [25, 30, 35]
+cities = ["New York", "London", "Paris"]
+profiles = [f"{name} ({age}) from {city}"
+           for name, age, city in zip(names, ages, cities)]
+print(f"Profiles: {profiles}")
+```
+
+### Performance and When to Use
+
+```python
+import time
+
+# Performance comparison: List comprehension vs traditional loop
+def time_traditional_loop():
+    start = time.time()
+    result = []
+    for i in range(100000):
+        if i % 2 == 0:
+            result.append(i**2)
+    end = time.time()
+    return end - start, len(result)
+
+def time_list_comprehension():
+    start = time.time()
+    result = [i**2 for i in range(100000) if i % 2 == 0]
+    end = time.time()
+    return end - start, len(result)
+
+# Run performance tests
+loop_time, loop_count = time_traditional_loop()
+comp_time, comp_count = time_list_comprehension()
+
+print(f"Traditional loop: {loop_time:.4f}s, {loop_count} items")
+print(f"List comprehension: {comp_time:.4f}s, {comp_count} items")
+print(f"List comprehension is {loop_time/comp_time:.2f}x faster!")
+```
+
+**💡 Pro Tips:**
+- List comprehensions are generally faster than equivalent for loops
+- Use comprehensions for simple transformations and filtering
+- For complex logic, traditional loops might be more readable
+- Dictionary and set comprehensions follow the same pattern
+- You can use multiple `for` clauses and `if` conditions in one comprehension
+
+**⚠️ When NOT to Use Comprehensions:**
+- When the logic becomes too complex (readability matters!)
+- When you need to handle exceptions within the loop
+- When you need to break out of the loop early
+- When the resulting line becomes too long (PEP 8 recommends max 79 characters)
+
+**🔍 Real-World Examples:**
+
+```python
+# Data processing example
+sales_data = [
+    {"product": "laptop", "price": 999, "quantity": 2, "category": "electronics"},
+    {"product": "mouse", "price": 25, "quantity": 10, "category": "electronics"},
+    {"product": "book", "price": 15, "quantity": 5, "category": "books"},
+    {"product": "headphones", "price": 150, "quantity": 3, "category": "electronics"}
+]
+
+# Calculate total revenue for electronics over $50
+electronics_revenue = [
+    item["price"] * item["quantity"]
+    for item in sales_data
+    if item["category"] == "electronics" and item["price"] > 50
+]
+print(f"Electronics revenue (>$50): ${sum(electronics_revenue)}")
+
+# Create product summary with discounted prices
+product_summary = [
+    {
+        "product": item["product"],
+        "original_price": item["price"],
+        "discounted_price": item["price"] * 0.9,  # 10% discount
+        "total_value": item["price"] * item["quantity"] * 0.9
+    }
+    for item in sales_data
+    if item["quantity"] > 2  # Only items with quantity > 2
+]
+
+for summary in product_summary:
+    print(f"{summary['product']}: ${summary['original_price']} → ${summary['discounted_price']:.2f}")
+
+# Text analysis example
+text = "The quick brown fox jumps over the lazy dog"
+word_analysis = [
+    {
+        "word": word,
+        "length": len(word),
+        "vowels": sum(1 for char in word.lower() if char in 'aeiou'),
+        "consonants": sum(1 for char in word.lower() if char.isalpha() and char not in 'aeiou')
+    }
+    for word in text.split()
+    if len(word) > 3  # Only analyze words longer than 3 characters
+]
+
+print("\nWord analysis:")
+for analysis in word_analysis:
+    print(f"{analysis['word']}: {analysis['length']} letters, "
+          f"{analysis['vowels']} vowels, {analysis['consonants']} consonants")
+```
+
+**🚀 Advanced Techniques:**
+
+```python
+# Flattening nested lists with conditions
+nested_numbers = [[1, 2, 3], [4, 5], [6, 7, 8, 9]]
+even_numbers = [num for sublist in nested_numbers for num in sublist if num % 2 == 0]
+print(f"Even numbers from nested lists: {even_numbers}")
+
+# Creating combinations
+colors = ["red", "blue", "green"]
+sizes = ["small", "large"]
+combinations = [f"{color} {size}" for color in colors for size in sizes]
+print(f"Color-size combinations: {combinations}")
+
+# Matrix operations
+matrix_a = [[1, 2], [3, 4]]
+matrix_b = [[5, 6], [7, 8]]
+
+# Matrix addition using list comprehensions
+matrix_sum = [
+    [matrix_a[i][j] + matrix_b[i][j] for j in range(len(matrix_a[0]))]
+    for i in range(len(matrix_a))
+]
+print(f"Matrix sum: {matrix_sum}")
+```
+
+List comprehensions are one of Python's most elegant features. They make code more concise, readable, and often faster than traditional loops. Master them, and your Python code will become much more Pythonic!
 
 ## 9. String Manipulation
 
