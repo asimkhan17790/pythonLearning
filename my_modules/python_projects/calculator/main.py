@@ -10,7 +10,7 @@ def print_operation_messages():
     print("==============================\n")
 
 
-def initalize_calculator():
+def initialize_calculator():
     try:
         a = int(input("Enter 1st number:"))
         b = int(input("Enter 2nd number:"))
@@ -35,4 +35,4 @@ def initalize_calculator():
 
 
 if __name__ == "__main__":
-    initalize_calculator()
+    initialize_calculator()

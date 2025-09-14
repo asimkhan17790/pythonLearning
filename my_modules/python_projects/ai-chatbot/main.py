@@ -3,7 +3,7 @@ from openai import OpenAI
 client = OpenAI()
 messages = [
     {"role": "developer",
-     "content": "Talk formally and very concise"
+     "content": "Talk formally and very concise and you should address yourself as Jarvis"
      }
 ]
 
@@ -14,6 +14,7 @@ def completion(message):
     # Add latest user input to message context with role set as : user
 
     messages.append({"role": "user",
+
                      "content": message
                      })
 
