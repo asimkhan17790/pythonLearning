@@ -1345,10 +1345,210 @@ class TestMath(unittest.TestCase):
 
 ## 29. Packaging & Virtual Environments
 
-- Use `pip` to install packages: `pip install requests`
-- Create virtual environment: `python -m venv env`
-- Activate: `source env/bin/activate` (macOS/Linux) or `.\env\Scripts\activate` (Windows)
-- Requirements file: `pip freeze > requirements.txt`
+### Creating Virtual Environments
+
+**Using venv (Python 3.3+):**
+```bash
+# Create virtual environment
+python -m venv myenv
+python -m venv venv                    # Common name
+python -m venv project_env             # Descriptive name
+python3 -m venv myenv                  # Explicit Python 3 (macOS/Linux)
+
+# Create with specific Python version (if multiple installed)
+python3.9 -m venv myenv               # macOS/Linux
+py -3.9 -m venv myenv                 # Windows with Python Launcher
+```
+
+**Using virtualenv (legacy/additional features):**
+```bash
+# Install virtualenv first
+pip install virtualenv
+
+# Create virtual environment
+virtualenv myenv
+virtualenv -p python3.9 myenv        # Specific Python version
+virtualenv --system-site-packages myenv  # Include system packages
+```
+
+### Activating Virtual Environments
+
+**Windows:**
+```cmd
+# Command Prompt
+.\myenv\Scripts\activate
+myenv\Scripts\activate.bat
+
+# PowerShell
+.\myenv\Scripts\Activate.ps1
+
+# Git Bash
+source myenv/Scripts/activate
+```
+
+**macOS/Linux:**
+```bash
+# Bash/Zsh
+source myenv/bin/activate
+. myenv/bin/activate                  # Short form
+
+# Fish shell
+source myenv/bin/activate.fish
+
+# Csh/Tcsh
+source myenv/bin/activate.csh
+```
+
+### Deactivating and Managing Environments
+
+```bash
+# Deactivate current environment
+deactivate
+
+# Check if in virtual environment
+echo $VIRTUAL_ENV                     # macOS/Linux
+echo %VIRTUAL_ENV%                    # Windows
+
+# Check Python location
+which python                          # macOS/Linux
+where python                          # Windows
+```
+
+### Package Management
+
+**Installing packages:**
+```bash
+# Install single package
+pip install requests
+pip install django==4.2.0            # Specific version
+pip install "django>=4.0,<5.0"       # Version range
+
+# Install multiple packages
+pip install requests beautifulsoup4 pandas
+
+# Install from requirements file
+pip install -r requirements.txt
+
+# Install in development mode (for local packages)
+pip install -e .
+```
+
+**Managing requirements:**
+```bash
+# Generate requirements file
+pip freeze > requirements.txt
+pip freeze --local > requirements.txt # Exclude global packages
+
+# Generate with pipreqs (only imports actually used)
+pip install pipreqs
+pipreqs . --output-file requirements.txt
+
+# Install exact versions from lock file
+pip install -r requirements.txt --no-deps
+```
+
+**Upgrading and uninstalling:**
+```bash
+# Upgrade package
+pip install --upgrade requests
+pip install -U requests               # Short form
+
+# Upgrade pip itself
+python -m pip install --upgrade pip
+
+# Uninstall package
+pip uninstall requests
+pip uninstall -r requirements.txt     # Uninstall from file
+
+# List installed packages
+pip list
+pip list --outdated                   # Show packages that need updates
+pip show requests                     # Package details
+```
+
+### Advanced Virtual Environment Management
+
+**Using conda (Anaconda/Miniconda):**
+```bash
+# Create environment
+conda create -n myenv python=3.9
+conda create -n myenv python=3.9 numpy pandas  # With packages
+
+# Activate/deactivate
+conda activate myenv
+conda deactivate
+
+# List environments
+conda env list
+conda info --envs
+
+# Remove environment
+conda remove -n myenv --all
+
+# Export/import environment
+conda env export > environment.yml
+conda env create -f environment.yml
+```
+
+**Environment management tools:**
+```bash
+# pipenv (combines pip and virtualenv)
+pip install pipenv
+pipenv install requests               # Creates Pipfile
+pipenv shell                          # Activate environment
+pipenv install --dev pytest          # Dev dependencies
+
+# poetry (modern dependency management)
+pip install poetry
+poetry init                           # Create pyproject.toml
+poetry add requests                   # Add dependency
+poetry shell                          # Activate environment
+poetry install                        # Install from pyproject.toml
+```
+
+### Best Practices
+
+**Directory structure:**
+```
+project/
+├── venv/                 # Virtual environment (add to .gitignore)
+├── src/                  # Source code
+├── tests/               # Test files
+├── requirements.txt     # Production dependencies
+├── requirements-dev.txt # Development dependencies
+├── .gitignore          # Include venv/, __pycache__/
+└── README.md
+```
+
+**Multiple requirement files:**
+```bash
+# requirements.txt (production)
+django==4.2.0
+requests==2.31.0
+
+# requirements-dev.txt (development)
+-r requirements.txt
+pytest==7.4.0
+black==23.7.0
+flake8==6.0.0
+
+# Install development dependencies
+pip install -r requirements-dev.txt
+```
+
+**Environment variables:**
+```bash
+# .env file (use python-dotenv)
+DEBUG=True
+SECRET_KEY=your-secret-key
+DATABASE_URL=sqlite:///db.sqlite3
+
+# Load in Python
+from dotenv import load_dotenv
+import os
+load_dotenv()
+debug = os.getenv('DEBUG')
+```
 
 ---
 
